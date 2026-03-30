@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIP Evaluation Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .stats-table th, .stats-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .stats-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .stats-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .visualization {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .visualization img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .pair {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .pair h4 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .instructions {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            margin: 20px 0;
+        }
+        .notes {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            margin: 20px 0;
+        }
+        .placeholder {
+            color: #999;
+            font-style: italic;
+        }
+        .missing-data {
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CLIP Evaluation Results</h1>
+        <p>This page displays the results of the CLIP similarity evaluation between generated interior design images and IKEA product images.</p>
+        
+        <h2>Summary Statistics</h2>
+        <table class="stats-table">
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Number of generated images</td>
+                <td><span id="generated-images-count">-</span></td>
+            </tr>
+            <tr>
+                <td>Number of IKEA images</td>
+                <td><span id="ikea-images-count">-</span></td>
+            </tr>
+            <tr>
+                <td>Total comparisons</td>
+                <td><span id="total-comparisons">-</span></td>
+            </tr>
+            <tr>
+                <td>Mean similarity</td>
+                <td><span id="mean-similarity">-</span></td>
+            </tr>
+            <tr>
+                <td>Standard deviation</td>
+                <td><span id="std-deviation">-</span></td>
+            </tr>
+            <tr>
+                <td>Min similarity</td>
+                <td><span id="min-similarity">-</span></td>
+            </tr>
+            <tr>
+                <td>Max similarity</td>
+                <td><span id="max-similarity">-</span></td>
+            </tr>
+        </table>
+        
+        <h2>Top Similar Pairs</h2>
+        <div id="top-pairs-container">
+            <div class="loading">Loading top similar pairs...</div>
+        </div>
+        
+        <h2>Visualizations</h2>
+        
+        <div class="visualization">
+            <h3>Similarity Heatmap</h3>
+            <img src="clip_eval_results/similarity_heatmap.png" alt="Similarity Heatmap" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiPkhlYXRtYXAgd2lsbCBhcHBlYXIgaGVyZTwvdGV4dD48L3N2Zz4=';">
+            <p><em>Heatmap showing similarity scores between generated images and IKEA products</em></p>
+        </div>
+        
+        <div class="visualization">
+            <h3>Top Similar Pairs</h3>
+            <img src="clip_eval_results/top_similar_pairs.png" alt="Top Similar Pairs" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiPkJhciBjaGFydCB3aWxsIGFwcGVhciBoZXJlPC90ZXh0Pjwvc3ZnPg==';">
+            <p><em>Bar chart showing the most similar image pairs</em></p>
+        </div>
+        
+        <div class="visualization">
+            <h3>Similarity Distribution</h3>
+            <img src="clip_eval_results/similarity_distribution.png" alt="Similarity Distribution" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiPkhpc3RvZ3JhbSB3aWxsIGFwcGVhciBoZXJlPC90ZXh0Pjwvc3ZnPg==';">
+            <p><em>Distribution of all similarity scores</em></p>
+        </div>
+        
+        <div class="missing-data">
+            <p>If you're seeing placeholder images, it means the visualization files haven't been generated yet.</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Generate Results</h3>
+            <ol>
+                <li>Run the CLIP similarity evaluation:
+                    <pre>python clip_similarity.py</pre>
+                </li>
+                <li>Generate visualizations:
+                    <pre>python clip_eval_visualizer.py</pre>
+                </li>
+                <li>Refresh this page to see the results</li>
+            </ol>
+        </div>
+        
+        <div class="notes">
+            <h3>Notes</h3>
+            <ul>
+                <li>Results will be populated after running the evaluation scripts</li>
+                <li>Visualizations require matplotlib and seaborn to be installed</li>
+                <li>The similarity scores are cosine similarities between CLIP embeddings (0 to 1, where 1 is most similar)</li>
+                <li>If images don't appear, check that the visualization files were generated successfully</li>
+                <li>The visualizer automatically handles cases where there are fewer image pairs than requested</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="clip_eval_results.js"></script>
+</body>
+</html>

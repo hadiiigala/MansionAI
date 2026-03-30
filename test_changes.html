@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MansionAR Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .failure {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>MansionAR Implementation Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Site Title and Name</h2>
+        <p>Expected: Title should be "MansionAR"</p>
+        <div class="test-result" id="title-test">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: Registration Flow</h2>
+        <p>Expected: Registration form should appear first, prompt section should be hidden initially</p>
+        <div class="test-result" id="registration-test">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: Creator Credits</h2>
+        <p>Expected: Footer should contain "Created by Dhwaj, Hadi, Kaustav and Eric"</p>
+        <div class="test-result" id="credits-test">Testing...</div>
+    </div>
+    
+    <script>
+        // Test 1: Check site title
+        const titleTest = document.getElementById('title-test');
+        if (document.title === 'MansionAR') {
+            titleTest.className = 'test-result success';
+            titleTest.textContent = 'PASS: Title is "MansionAR"';
+        } else {
+            titleTest.className = 'test-result failure';
+            titleTest.textContent = `FAIL: Title is "${document.title}", expected "MansionAR"`;
+        }
+        
+        // Test 3: Check creator credits in footer
+        const creditsTest = document.getElementById('credits-test');
+        const footerText = document.body.textContent;
+        if (footerText.includes('Created by Dhwaj, Hadi, Kaustav and Eric')) {
+            creditsTest.className = 'test-result success';
+            creditsTest.textContent = 'PASS: Creator credits found in footer';
+        } else {
+            creditsTest.className = 'test-result failure';
+            creditsTest.textContent = 'FAIL: Creator credits not found in footer';
+        }
+        
+        // Test 2: Check registration flow
+        const registrationTest = document.getElementById('registration-test');
+        const registrationForm = document.querySelector('#registrationForm');
+        const promptSection = document.querySelector('#promptSection');
+        
+        if (registrationForm && promptSection) {
+            if (promptSection.style.display === 'none') {
+                registrationTest.className = 'test-result success';
+                registrationTest.textContent = 'PASS: Registration form visible, prompt section hidden initially';
+            } else {
+                registrationTest.className = 'test-result failure';
+                registrationTest.textContent = 'FAIL: Prompt section should be hidden initially';
+            }
+        } else {
+            registrationTest.className = 'test-result failure';
+            registrationTest.textContent = 'FAIL: Registration form or prompt section not found';
+        }
+    </script>
+</body>
+</html>

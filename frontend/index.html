@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MansionAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <nav class="nav-bar">
+                <div class="brand-mark">
+                    <span class="brand-icon">AI</span>
+                    <div>
+                        <p class="brand-kicker">MansionAI</p>
+                        <p class="brand-label">Interior Design Studio</p>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#promptForm">Generator</a></li>
+                    <li><a href="#resultsSection">Gallery</a></li>
+                    <li><a href="#userInfoForm">Profile</a></li>
+                </ul>
+                <a class="nav-cta" href="#userInfoForm">Register</a>
+            </nav>
+
+            <section class="hero">
+                <div class="hero-content">
+                    <p class="eyebrow">Curated interiors, generated in seconds</p>
+                    <h1>Design immersive spaces with <span>AI intuition</span></h1>
+                    <p class="hero-copy">MansionAI blends architectural intelligence with aesthetic sensitivity. Describe the feelings you want a space to evoke and watch the concept boards come alive.</p>
+                    <ul class="hero-points">
+                        <li>Multi-room intelligence with negative prompt control</li>
+                        <li>Studio-grade color palette &amp; lighting presets</li>
+                        <li>Share-ready exports for clients &amp; vendors</li>
+                    </ul>
+                    <div class="hero-cta">
+                        <a class="btn-primary" href="#userInfoForm">Get Started</a>
+                        <button class="btn-ghost" type="button" onclick="document.getElementById('resultsSection').scrollIntoView({behavior: 'smooth'})">See live output</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div>
+                            <p class="stat-value">1.2K+</p>
+                            <p class="stat-label">Spaces curated</p>
+                        </div>
+                        <div>
+                            <p class="stat-value">92%</p>
+                            <p class="stat-label">Client approval</p>
+                        </div>
+                        <div>
+                            <p class="stat-value"><span>∞</span></p>
+                            <p class="stat-label">Concept iterations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="preview-card">
+                        <div class="preview-header">
+                            <p>Concept moodboard</p>
+                            <span>Neutral Luxe</span>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80" alt="Interior preview">
+                        <div class="preview-meta">
+                            <div>
+                                <p class="meta-label">Palette</p>
+                                <p class="meta-value">Champagne, Dove, Slate</p>
+                            </div>
+                            <div>
+                                <p class="meta-label">Style</p>
+                                <p class="meta-value">Japandi Minimal</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-badge">Live AI Guidance</div>
+                    <div class="floating-badge offset">Acoustic planning</div>
+                </div>
+            </section>
+        </header>
+
+        <main class="layout-grid">
+            <div class="main-content">
+                <!-- Registration Section -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">Get Started</p>
+                            <h2>Register Your Account</h2>
+                        </div>
+                        <p class="section-copy">Please register to access our interior design tools.</p>
+                    </div>
+                    <form id="registrationForm" class="panel">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registration">Registration ID</label>
+                            <input type="text" id="registration" name="registration" placeholder="Enter registration ID" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Register</button>
+                    </form>
+                </section>
+
+                <!-- Prompt Section (Initially hidden) -->
+                <section class="form-section" id="promptSection" style="display: none;">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">Creative direction</p>
+                            <h2>Describe the ambiance you imagine</h2>
+                        </div>
+                        <p class="section-copy">Voice-note your mood boards, refine the palette with negative prompts, and let MansionAI blend lighting, materials, and decor.</p>
+                    </div>
+                    <form id="promptForm" class="panel">
+                        <div class="form-group">
+                            <label for="positivePrompt">Positive Prompt <span class="required">*</span></label>
+                            <div class="prompt-input-group">
+                                <textarea 
+                                    id="positivePrompt" 
+                                    name="positivePrompt" 
+                                    rows="4" 
+                                    placeholder="Describe what you want in your interior design...&#10;Example: Modern Scandinavian living room with natural light, featuring light wood floors, white furniture, and minimalist decor"
+                                    required></textarea>
+                                <div class="audio-controls">
+                                    <button type="button" id="recordPositiveBtn" class="btn-audio" title="Start recording">🎤 Record</button>
+                                    <button type="button" id="speakPositiveBtn" class="btn-audio" title="Read prompt aloud">🔊 Speak</button>
+                                </div>
+                            </div>
+                            <small class="hint">Describe the interior design you want to generate</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="negativePrompt">Negative Prompt</label>
+                            <div class="prompt-input-group">
+                                <textarea 
+                                    id="negativePrompt" 
+                                    name="negativePrompt" 
+                                    rows="3" 
+                                    placeholder="Describe what you DON'T want...&#10;Example: blurry, dark, cluttered, people, low quality, distortion"></textarea>
+                                <div class="audio-controls">
+                                    <button type="button" id="recordNegativeBtn" class="btn-audio" title="Start recording">🎤 Record</button>
+                                    <button type="button" id="speakNegativeBtn" class="btn-audio" title="Read prompt aloud">🔊 Speak</button>
+                                </div>
+                            </div>
+                            <small class="hint">Optional: Describe what to avoid in the generated image</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="numViews">Number of Views (1-4)</label>
+                            <select id="numViews" name="numViews">
+                                <option value="1">1 View</option>
+                                <option value="2">2 Views</option>
+                                <option value="3" selected>3 Views</option>
+                                <option value="4">4 Views</option>
+                            </select>
+                            <small class="hint">Select how many different views of the room you want to generate</small>
+                        </div>
+
+                        <button type="submit" id="generateBtn" class="btn-primary">
+                            <span class="btn-text">Generate Design</span>
+                            <span class="btn-loader" style="display: none;">
+                                <span class="spinner"></span>
+                                Generating...
+                            </span>
+                        </button>
+                    </form>
+                </section>
+                
+                <!-- History Section (Initially hidden) -->
+                <section class="form-section" id="historySection" style="display: none;">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">Your History</p>
+                            <h2>Past Design Requests</h2>
+                        </div>
+                        <p class="section-copy">Review your previous design prompts and generated images.</p>
+                    </div>
+                    <div class="panel" id="historyContainer">
+                        <p>No history available. Generate some designs to see them here.</p>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="insight-panel">
+                <section class="results-section" id="resultsSection" style="display: none;">
+                    <div class="section-header compact">
+                        <div>
+                            <p class="eyebrow">Live concepts</p>
+                            <h2>Generated Design</h2>
+                        </div>
+                        <p class="section-copy">Download the artwork or iterate with fresh prompts.</p>
+                    </div>
+                    <div class="result-container">
+                        <div class="multi-view-container" id="multiViewContainer">
+                            <!-- Multi-view images will be inserted here -->
+                        </div>
+                        <div class="result-info">
+                            <div class="info-card">
+                                <h3>Prompt Used</h3>
+                                <p id="promptDisplay"></p>
+                            </div>
+                            <div class="info-card" id="negativePromptDisplay" style="display: none;">
+                                <h3>Negative Prompt</h3>
+                                <p id="negativePromptText"></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+                <div class="insight-card">
+                    <p class="eyebrow">Why designers choose MansionAI</p>
+                    <h3>Photoreal clarity, sustainable suggestions, and export-ready boards.</h3>
+                    <ul>
+                        <li>Lighting models tuned for daylight + evening scenes</li>
+                        <li>Material swaps with supplier-ready specs</li>
+                        <li>Version history to track client feedback</li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="site-footer">
+            <p>© <span id="year"></span> MansionAI. Crafted for visionary interiors.</p>
+            <p>Created by Dhwaj, Hadi, Kaustav and Eric</p>
+            <div class="footer-links">
+                <a href="mailto:studio@mansionai.ai">studio@mansionai.ai</a>
+                <span>·</span>
+                <a href="#userInfoForm">Start a project</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Image Modal for Enlarged View -->
+    <div id="imageModal" class="modal" style="display: none;">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="enlargedImage">
+        <div id="modalCaption"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

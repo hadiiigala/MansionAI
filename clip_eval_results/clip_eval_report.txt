@@ -1,0 +1,34 @@
+CLIP Similarity Evaluation Report
+==================================================
+
+SUMMARY STATISTICS
+--------------------
+Number of generated images: 6
+Number of IKEA images: 1
+Total comparisons: 6
+Mean similarity: 0.6095
+Standard deviation: 0.0476
+Min similarity: 0.5497
+Max similarity: 0.6895
+
+TOP SIMILAR PAIRS
+--------------------
+5. Similarity: 0.6895
+   Generated: b0ea015a-50b5-4488-b487-61d856e5649d.png
+   IKEA: dataset_description.png
+
+4. Similarity: 0.6399
+   Generated: 2c320e30-09ec-454c-afed-72dc66cd559b.png
+   IKEA: dataset_description.png
+
+3. Similarity: 0.6267
+   Generated: e08e6626-454a-48a4-903a-0574435e8b64.png
+   IKEA: dataset_description.png
+
+2. Similarity: 0.5821
+   Generated: 583f8ea0-74e4-4b72-abba-9a9cdda8a199.png
+   IKEA: dataset_description.png
+
+1. Similarity: 0.5692
+   Generated: 91628c87-8c7e-4d94-a8f6-2140dd5064e3.png
+   IKEA: dataset_description.png
